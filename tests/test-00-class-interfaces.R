@@ -45,7 +45,15 @@ assertMessage(
   {
     js <- ScriptEngine$new("javascript", class.path = sprintf(" %s badfile %s b ", .Platform$path.sep, .Platform$path.sep))
   }
-  , "The file 'badfile' specified in the class path does not exist."
+  , "badfile"
+  , FALSE
+)
+
+assertMessage(
+  {
+    js <- ScriptEngine$new("javascript", class.path = "./*")
+  }
+  , "Wildcards ('*') are not currently supported in class paths."
 )
 
 js <- ScriptEngine$new("  javascript  ") # Intentionally using spaces for testing trim...
